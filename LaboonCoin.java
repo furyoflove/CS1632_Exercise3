@@ -23,8 +23,6 @@ public class LaboonCoin {
      */
     
     public String createBlock(String data, int prevHash, int nonce, int hash) {
-	
-	// blockchain.add();
 	return data + "|" + String.format("%08x", prevHash) + "|" + String.format("%08x", nonce) + "|" + String.format("%08x", hash);
     }
 
@@ -68,15 +66,13 @@ public class LaboonCoin {
     public int hash(String data) {
 		
 	int n = 10000000;
-	
 	// create hash value by Laboon Hash algorithm
 	for (int i = 0; i < data.length();i++) {
-		//int ascii = (int)data.charAt(i);
 		n = (n * (int)data.charAt(i)) + (int)data.charAt(i);
 	}
 	
+	// System.out.println(n);
 	return n;
-	
     }
 
     /**
@@ -97,19 +93,19 @@ public class LaboonCoin {
     public boolean validHash(int difficulty, int hash) {
 	
 	String hashVal = String.format("%08x", hash);
+	
+	// cheesy work around to make sure there 
+	// are difficulty-length zeroes at the start of the hash
 	String start = "";
 	for(int i = 0; i < difficulty; i++) {
 		start += "0";
-	}
-	// System.out.println("Hash value: " + hashVal);
-	// System.out.println("leading 0's: " + start);
+	} 
 	
 	if(hashVal.startsWith(start)) {
 		return true;
 	} else {
 		return false;
 	}
-	
 	}
 
     /**
@@ -139,6 +135,7 @@ public class LaboonCoin {
 	    // System.out.print("Trying: " + toTry + ".. ");
 	    
 	    hashVal = hash(toTry);
+		// Uncomment to see all the hash values that were generated
 	    // System.out.println("hash: " + String.format("%08x", hashVal));
 	    if (validHash(difficulty, hashVal)) {
 		foundNonce = true;
@@ -219,4 +216,5 @@ public class LaboonCoin {
 	LaboonCoin lc = new LaboonCoin();
 	lc.run(difficulty);
     }
+	
 }
