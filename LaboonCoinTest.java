@@ -8,8 +8,10 @@ public class LaboonCoinTest {
     // does not return a null reference
     @Test
     public void testLaboonCoinExists() {
-	LaboonCoin l = new LaboonCoin();
-	assertNull(l);
+		
+		LaboonCoin l = new LaboonCoin();
+		assertNull(l);
+		
     }
     
 }
